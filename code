@@ -1,0 +1,17 @@
+# project
+import pandas as pd
+
+# Load retail data
+df = pd.read_csv("retail_data.csv")
+
+# Correlation between inventory days and profit
+correlation = df['inventory_days'].corr(df['profit'])
+print("Correlation between Inventory Days and Profit:", correlation)
+
+# Seasonal sales analysis
+df['order_date'] = pd.to_datetime(df['order_date'])
+df['month'] = df['order_date'].dt.month
+
+monthly_sales = df.groupby('month')['sales'].sum()
+print("\nMonthly Sales:")
+print(monthly_sales)
